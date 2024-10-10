@@ -1,0 +1,17 @@
+name: Log Reactions
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  logFeedback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Thumbs Up or Down
+        run: |
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          if [[ "$COMMENT_BODY" == "👍" ]]; then
+            echo "User left positive feedback."
+          elif [[ "$COMMENT_BODY" == "👎" ]]; then
+            echo "User left negative feedback."
+          fi
